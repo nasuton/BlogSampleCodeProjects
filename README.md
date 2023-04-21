@@ -1,2 +1,2 @@
-# BlogSampleCodeProjects
-Blogで記載しているサンプルコード用プロジェクト
+# About this project
+この[Blog](https://nasuton.net/blog/)で記載しているサンプルコード用プロジェクトです
