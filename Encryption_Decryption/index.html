@@ -1,0 +1,77 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<title>データを暗号化してやり取りする</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+ 
+<script type="text/javascript">
+function crypto() {
+    // 入力された値を取得
+    var textValue = document.getElementById('inputText').value;
+    if(textValue !== "") {
+        // 表示用のテキスト表示
+        var displayText = document.getElementById('inputValue');
+        displayText.innerText = `入力された値：${textValue}`;
+        displayText.style.visibility = "visible";
+
+        // 暗号化
+        var key = CryptoJS.enc.Utf8.parse('01234567890123456789012345678901');
+        var iv = CryptoJS.enc.Utf8.parse('0123456789012345');
+        
+        var encryptedValue = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(textValue), key,
+        {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        
+        // 暗号化した値
+        var encryptedText = document.getElementById('encryptedValue');
+        encryptedText.innerText = `暗号化された値(送信する値)：${encryptedValue.toString()}`;
+        encryptedText.style.visibility = "visible";
+
+        // 送信用データの作成
+        const sendData = { "value" : encryptedValue.toString() }
+        let jsonData = JSON.stringify(sendData);
+
+        var postURL = "AzureFunctionのURL";
+        var send_data = new XMLHttpRequest();
+        send_data.onreadystatechange = function() {
+            if(send_data.readyState === 4 && send_data.status === 200) {
+                // console.log(send_data.responseText);
+                var res = JSON.parse(send_data.responseText);
+                // レスポンスデータを表示
+                var responseText = document.getElementById('responseValue');
+                responseText.innerText = `レスポンスで受け取った値：${res.result}`;
+                responseText.style.visibility = "visible";
+
+                // 復号化した値を表示
+                var plain = CryptoJS.AES.decrypt(res.result, key, { iv: iv });
+                var plainText = document.getElementById('plainValue');
+                plainText.innerText = `復号化した値：${plain.toString(CryptoJS.enc.Utf8)}`;
+                plainText.style.visibility = "visible";
+            }
+        }
+        send_data.open('POST', postURL);
+        send_data.setRequestHeader('content-type', 'application/json');
+        send_data.send(jsonData);
+    
+        console.log('Source :' + textValue);
+        console.log('Crypto :' + encryptedValue);
+        console.log('jsonData :' + jsonData);
+    }
+}
+</script>
+</head>
+<body>
+    <h2>データを暗号化してやり取りする</h2>
+    <input type="text" id="inputText" name="inputText" required
+       minlength="1" size="10">
+    <button onclick="crypto();">send</button>
+    <p id="inputValue" style="visibility:hidden">入力された値</p>
+    <p id="encryptedValue" style="visibility:hidden">送信した値</p>
+    <p id="responseValue" style="visibility:hidden">返却された値</p>
+    <p id="plainValue" style="visibility:hidden">復号化した値</p>
+</body>
+</html>
