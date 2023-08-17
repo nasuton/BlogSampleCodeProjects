@@ -1,0 +1,17 @@
+{
+  "name": "msgraphapi_graphclient",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/identity": "^3.2.3",
+    "@microsoft/microsoft-graph-client": "^3.0.5",
+    "express": "^4.18.2",
+    "isomorphic-fetch": "^3.0.0"
+  }
+}
