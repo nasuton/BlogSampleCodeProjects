@@ -6,7 +6,7 @@
 3. CLIENT_SECRET  - 使用するAzureアプリ上のクライアントシークレットキーの値
 
 ## 使用しているモジュールについて
-package.jsonにも記載がありますが以下の3つです
+package.jsonにも記載がありますが以下の4つです
 1. Express
 2. @azure/identity
 3. @microsoft/microsoft-graph-client
