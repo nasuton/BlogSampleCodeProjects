@@ -229,7 +229,7 @@ internal class WPRestAPI
     /// <param name="postDatas">投稿データリスト</param>
     public void WP_PostDataCSV_Write(List<WP_PostData> postDatas)
     {
-        string csvPath = AppSetting.GetString("csvPath");
+        string csvPath = @"CSVファイルのパス";
         using (var writer = new StreamWriter(csvPath, false, Encoding.UTF8))
         {
             // ヘッダーを書き出し
