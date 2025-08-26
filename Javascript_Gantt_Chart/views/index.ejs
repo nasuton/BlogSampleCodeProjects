@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1><%= title %></h1>
+        
+        <!-- タスク追加フォーム -->
+        <div class="controls">
+            <div class="control-group">
+                <label>タスク名</label>
+                <input type="text" id="taskName" placeholder="タスク名を入力">
+            </div>
+            <div class="control-group">
+                <label>開始日</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="control-group">
+                <label>終了日</label>
+                <input type="date" id="endDate">
+            </div>
+            <div class="control-group">
+                <label>進捗 (%)</label>
+                <input type="number" id="progress" min="0" max="100" value="0">
+            </div>
+            <div class="control-group">
+                <label>担当者</label>
+                <input type="text" id="assignee" placeholder="担当者名">
+            </div>
+            <div class="control-group">
+                <label>&nbsp;</label>
+                <button id="addTaskBtn">タスクを追加</button>
+            </div>
+        </div>
+
+        <!-- 期間操作コントロール -->
+        <div class="chart-controls">
+            <div class="period-controls">
+                <h4>表示期間設定</h4>
+                <div class="period-group">
+                    <label>表示開始日</label>
+                    <input type="date" id="viewStartDate">
+                </div>
+                <div class="period-group">
+                    <label>表示終了日</label>
+                    <input type="date" id="viewEndDate">
+                </div>
+                <div class="period-group">
+                    <label>表示単位</label>
+                    <select id="timeUnit">
+                        <option value="day">日</option>
+                        <option value="week">週</option>
+                        <option value="month">月</option>
+                    </select>
+                </div>
+                <div class="period-buttons">
+                    <button id="updatePeriodBtn">期間更新</button>
+                    <button id="resetPeriodBtn">期間リセット</button>
+                    <button id="fitToDataBtn">データに合わせる</button>
+                </div>
+            </div>
+            
+            <div class="zoom-controls">
+                <h4>ズームコントロール</h4>
+                <div class="zoom-buttons">
+                    <button id="zoomInBtn">拡大 (+)</button>
+                    <button id="zoomOutBtn">縮小 (-)</button>
+                    <button id="zoomResetBtn">リセット</button>
+                </div>
+                <div class="view-presets">
+                    <button class="preset-btn" data-preset="week">今週</button>
+                    <button class="preset-btn" data-preset="month">今月</button>
+                    <button class="preset-btn" data-preset="quarter">四半期</button>
+                    <button class="preset-btn" data-preset="year">今年</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ガンチャート表示エリア -->
+        <div class="chart-container">
+            <canvas id="ganttChart"></canvas>
+        </div>
+
+        <!-- タスク一覧 -->
+        <div class="task-list">
+            <h3>タスク一覧</h3>
+            <div id="taskList"></div>
+        </div>
+    </div>
+
+    <script src="/gantt.js"></script>
+</body>
+</html>
