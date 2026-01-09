@@ -1,0 +1,2 @@
+﻿# 使用する際の注意点  
+JapaneseFuzzySearchクラスのインスタンスに渡す引数 ngramSize は使用する際に調整してください
