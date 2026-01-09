@@ -4,7 +4,7 @@ _apiKey、_userName、_hostNameにそれぞれ対応した値を設定してく�
 
 # 各関数(メソッド)について
 
-## Task `<HttpResponseMessage>` GetAPIAsync(string url)
+## Task<HttpResponseMessage> GetAPIAsync(string url)
 
 引数のURLに対してGetリクエストを送信する
 
@@ -24,6 +24,8 @@ WordPress上の全投稿データを取得する(固定ページは含まれま�
 
 WordPress上の最新投稿を取得する(固定ページは含まれません)
 
-## void WP_PostDataCSV_Write(List<WP_PostData> postDatas)
+## WP_PostDataCSV_Write(List<WP_PostData> postDatas)
 
 投稿データをCSVファイルに書き出します
+# 本コードの解説記事へのリンク
+[本コードの解説記事](https://nasuton.net/blog/wordpressrestapi_activation/)

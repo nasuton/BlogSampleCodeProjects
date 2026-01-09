@@ -5,3 +5,5 @@
 ・userName - 認証で使用するユーザーアドレス(二段階認証が設定されていないもの)  
 ・userPass - userNameのパスワード  
 ・scopes   - Azure上で設定したAPIアクセス許可  
+# 本コードの解説記事へのリンク
+[本コードの解説記事](https://nasuton.net/blog/manipulating_sharepoint_graphapi/)

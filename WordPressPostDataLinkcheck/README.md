@@ -6,3 +6,5 @@
 
 正規表現のパターンは場合によってはうまく動作しない可能性があるので注意してください
 また、本コードの一部は「HtmlAgilityPack」というライブラリを使用しているためNugetよりDLしてください
+# 本コードの解説記事へのリンク
+[本コードの解説記事](https://nasuton.net/blog/wordpress_postdata_linkcheck/)

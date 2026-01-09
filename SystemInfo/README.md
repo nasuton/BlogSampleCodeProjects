@@ -6,3 +6,5 @@
 ・ルーティングテーブルの情報   
 ・現在動作しているタスクの情報   
 ・EventLogのエラーと警告の情報(実行日の1日前までの内容EventLogのエラーと警告の情報)
+# 本コードの解説記事へのリンク
+[本コードの解説記事](https://nasuton.net/blog/powershell_systeminfo/)

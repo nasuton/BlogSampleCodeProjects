@@ -14,3 +14,5 @@ package.jsonにも記載がありますが以下の4つです
 
 ## プロジェクトの作成
 NodeJSのある環境上で「npm install」を実行し、インストール後に「node index.js」で実行できます
+# 本コードの解説記事へのリンク
+[本コードの解説記事](https://nasuton.net/blog/javascript_microsoftgraphapi_express_sdk/)

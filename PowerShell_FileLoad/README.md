@@ -12,3 +12,9 @@
 ・WordFileLoad.ps1       - Word内のテキスト読み込み、ハイパーリンクの取得。  
 ・TxtFileLoad.ps1        - テキストファイル内のテキスト読み込み。  
 ・PdfFileLoad.ps1        - Pdfファイル内のテキスト読み込み。  
+
+# 各ファイルの解説記事へのリンク
+・[ExcelFileLoad.ps1](https://nasuton.net/blog/powershellfileload_excel/)  
+・[PowerPointFileLoad.ps1](https://nasuton.net/blog/powershellfileload_powerpoint/)  
+・[WordFileLoad.ps1](https://nasuton.net/blog/powershellfileload_word/)  
+・[PdfFileLoad.ps1](https://nasuton.net/blog/powershellfileload_pdf/)
