@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "SPFx: serve",
+      "detail": "開発サーバーを起動 (https://localhost:4321)",
+      "type": "shell",
+      "command": "bash -c '. load-env.sh; if [ -n \"$SPFX_SERVE_TENANT_DOMAIN\" ]; then echo \"Workbench URL: https://$SPFX_SERVE_TENANT_DOMAIN/_layouts/workbench.aspx?debugManifestsFile=https%3A%2F%2Flocalhost%3A4321%2Ftemp%2Fbuild%2Fmanifests.js&debug=true&noredir=true\"; else echo \"[hint] .env に SPFX_SERVE_TENANT_DOMAIN を設定すると Workbench URL を表示します\"; fi; echo; npx heft start --clean --nobrowser'",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "spfx",
+        "pattern": { "regexp": "^(.*)$", "file": 1, "message": 1 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting incremental build",
+          "endsPattern": "Waiting for changes"
+        }
+      },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "SPFx: build (production)",
+      "detail": "sharepoint/solution/*.sppkg を生成",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": ["$tsc", "$eslint-stylish"]
+    },
+    {
+      "label": "SPFx: clean",
+      "type": "shell",
+      "command": "npm run clean",
+      "problemMatcher": []
+    },
+    {
+      "label": "SPFx: trust dev cert",
+      "detail": "開発用 HTTPS 証明書を生成して ./certs に出力",
+      "type": "shell",
+      "command": "trust-dev-cert.sh",
+      "problemMatcher": []
+    }
+  ]
+}

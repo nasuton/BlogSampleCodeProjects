@@ -1,0 +1,8 @@
+# Dev Containers 専用のオーバーライド。
+# VS Code がコンテナ内 localhost:4321 をホストへフォワードするため、
+# docker 側のポート公開は解除する (二重公開で別ポートへ逃げるのを防ぐ)。
+services:
+  spfx:
+    ports: !reset []
+    # VS Code Server が接続し続けられるようコンテナを常駐させる
+    command: sleep infinity

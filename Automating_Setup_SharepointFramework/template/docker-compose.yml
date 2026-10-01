@@ -1,0 +1,30 @@
+services:
+  spfx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image / container_name は固定しない:
+    # compose がフォルダー名からプロジェクト単位で採番するため、複数プロジェクトを同時に起動できる
+    working_dir: /usr/app/spfx
+    volumes:
+      # プロジェクト本体をマウント (ソースはホスト側で編集可能)
+      - ./:/usr/app/spfx
+      # node_modules はコンテナ内 volume に置いてパフォーマンスと OS 差異の問題を回避
+      - spfx_node_modules:/usr/app/spfx/node_modules
+      # 開発用 HTTPS 証明書を永続化
+      - spfx_rushstack:/home/node/.rushstack
+    ports:
+      - "4321:4321"     # heft start (dev server)
+    environment:
+      # ipv4first: dev server を ::1 ではなく 127.0.0.1 にバインドさせ、
+      # VS Code のポートフォワードや socat から localhost で到達できるようにする
+      - NODE_OPTIONS=--max-old-space-size=4096 --dns-result-order=ipv4first
+      # serve.json の {tenantDomain} を置換する (例: contoso.sharepoint.com)
+      - SPFX_SERVE_TENANT_DOMAIN=${SPFX_SERVE_TENANT_DOMAIN:-}
+    stdin_open: true
+    tty: true
+    command: bash
+
+volumes:
+  spfx_node_modules:
+  spfx_rushstack:

@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // 事前に serve (Ctrl+Shift+B) を起動しておき、F5 でホスト側の Edge を開いてアタッチする
+      "name": "SPFx: Hosted Workbench (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      // Dev Container 内ではブラウザを起動できないため、ホスト (Windows) 側で起動する。
+      // js-debug の companion 拡張がデバッグ接続をコンテナ内 VS Code へトンネルする。
+      "browserLaunchLocation": "ui",
+      // SPFX_SERVE_TENANT_DOMAIN は .env → docker-compose → コンテナ環境変数として渡される。
+      // 解決されない場合は <tenant>.sharepoint.com を直接書く。
+      "url": "https://${env:SPFX_SERVE_TENANT_DOMAIN}/_layouts/workbench.aspx?debugManifestsFile=https%3A%2F%2Flocalhost%3A4321%2Ftemp%2Fbuild%2Fmanifests.js&debug=true&noredir=true",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///.././src/*": "${webRoot}/src/*",
+        "webpack:///../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../../src/*": "${webRoot}/src/*"
+      },
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      // 既定では毎回一時プロファイルで起動するため M365 へのサインインが毎回必要。
+      // サインインを保持したい場合はホスト側の固定パスを指定する (例):
+      // "userDataDir": "C:\\Users\\<user>\\.spfx-edge-profile"
+      "runtimeArgs": ["--no-first-run", "--no-default-browser-check"]
+    },
+    {
+      // serve が動いていない状態から F5 一発で serve 起動 → ブラウザ起動まで行う
+      "name": "SPFx: serve + Hosted Workbench (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "browserLaunchLocation": "ui",
+      "preLaunchTask": "SPFx: serve",
+      "url": "https://${env:SPFX_SERVE_TENANT_DOMAIN}/_layouts/workbench.aspx?debugManifestsFile=https%3A%2F%2Flocalhost%3A4321%2Ftemp%2Fbuild%2Fmanifests.js&debug=true&noredir=true",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///.././src/*": "${webRoot}/src/*",
+        "webpack:///../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../../src/*": "${webRoot}/src/*"
+      },
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "runtimeArgs": ["--no-first-run", "--no-default-browser-check"]
+    }
+  ]
+}

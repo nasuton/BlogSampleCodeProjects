@@ -1,0 +1,9 @@
+node_modules
+lib
+dist
+temp
+release
+sharepoint/solution
+.git
+Doc
+

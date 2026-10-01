@@ -1,0 +1,39 @@
+{
+  "name": "SPFx (Node 22)",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.devcontainer.yml"
+  ],
+  "service": "spfx",
+  "workspaceFolder": "/usr/app/spfx",
+  "remoteUser": "node",
+  "shutdownAction": "stopCompose",
+
+  // dev server はコンテナ内 localhost:4321 にバインドするので VS Code がホストへフォワードする
+  "forwardPorts": [4321],
+  "portsAttributes": {
+    "4321": {
+      "label": "SPFx dev server",
+      "protocol": "https",
+      "onAutoForward": "silent"
+    }
+  },
+
+  // 初回作成時: 依存関係のインストールと開発用 HTTPS 証明書の生成 (./certs へ出力)
+  "postCreateCommand": "npm install && trust-dev-cert.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next"
+      ],
+      "settings": {
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "files.eol": "\n",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
