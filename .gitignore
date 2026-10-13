@@ -3,6 +3,45 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Local Android SDK configuration
+local.properties
+
+# IDE settings
+.idea/
+.vscode/
+*.iml
+
+# Gradle / Kotlin caches and build outputs
+.gradle/
+.kotlin/
+**/build/
+.externalNativeBuild/
+.cxx/
+captures/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.log
+
+# Signing keys and private configuration
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+keystore.properties
+signing.properties
+secrets.properties
+.env
+.env.*
+!.env.example
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
 # User-specific files
 *.rsuser
 *.suo
